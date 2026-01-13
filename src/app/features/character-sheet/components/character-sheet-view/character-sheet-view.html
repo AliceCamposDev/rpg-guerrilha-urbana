@@ -1,0 +1,256 @@
+<div class="background">
+    <div class="container">
+        <header class="header">
+            <h1>FICHA DE PERSONAGEM</h1>
+            <h2>Guerrilha Urbana</h2>
+        </header>
+
+        <div class="character-sheet">
+            <div class="card">
+                <h3 class="card-title"><i class="fas fa-user"></i> Dados Básicos</h3>
+                
+                <div class="form-group">
+                    <label for="characterName">Nome do Personagem</label>
+                    <input type="text" id="characterName" class="form-control" 
+                        [(ngModel)]="characterName" placeholder="Marilene Villas-Boas">
+                </div>
+                
+                <div class="form-group">
+                    <label for="codename">Codinome do Personagem (se existente)</label>
+                    <input type="text" id="codename" class="form-control" 
+                        [(ngModel)]="codename" placeholder="Índia">
+                </div>
+
+                <div class="form-group">
+                    <label for="characterJob">Trabalho/Ocupação</label>
+                    <input type="text" id="characterJob" class="form-control" 
+                        [(ngModel)]="characterJob" placeholder="Estudante de Psicologia">
+                </div>
+                
+                <div class="form-group">
+                    <label for="characterAge">Idade</label>
+                    <input type="number" id="characterAge" class="form-control" 
+                        [(ngModel)]="characterAge" min="18" max="70" placeholder="22">
+                </div>
+                
+                <div class="form-group">
+                    <label for="characterContribution">Como pretende contribuir?</label>
+                    <textarea id="characterContribution" class="form-control" 
+                            [(ngModel)]="characterContribution" 
+                            placeholder="Com sua formação em psicologia, pode atuar na análise de comportamentos e recrutamento, além de sua coragem em combate."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="joinDate">Data de Ingresso</label>
+                    <input type="date" id="joinDate" class="form-control" 
+                        [(ngModel)]="joinDate">
+                </div>
+                
+                <div class="form-group">
+                    <label for="joinReason">Por que seu personagem se juntou à ALN?</label>
+                    <textarea id="joinReason" class="form-control" 
+                            [(ngModel)]="joinReason" 
+                            placeholder="Perseguida pelo regime militar devido à sua militância estudantil, decidiu entrar na clandestinidade e lutar contra a ditadura."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="characterBackground">Background (História)</label>
+                    <textarea id="characterBackground" class="form-control" rows="10" 
+                            [(ngModel)]="characterBackground" 
+                            placeholder="Marilena Villas Boas Pinto, nascida em 8 de julho de 1948 no Rio de Janeiro, era descendente da aristocracia brasileira..."></textarea>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h3 class="card-title"><i class="fas fa-cogs"></i> Habilidades e Status</h3>    
+                
+                <!-- Status do Personagem -->
+                <div class="character-status">
+                    <div class="status-item">
+                        <div class="status-label">Pontos de Vida</div>
+                        <div class="status-value">
+                            <div class="hp-display">{{hp}}</div>
+                        </div>
+                    </div>
+                    
+                    <div class="status-item">
+                        <div class="status-label">Nível</div>
+                        <div class="status-value">
+                            <input type="number" class="number-input" 
+                                [(ngModel)]="level" min="1" max="20" readonly>
+                            <div class="number-controls">
+                                <button (click)="increaseLevel()">▲</button>
+                                <button (click)="decreaseLevel()">▼</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="status-item">
+                        <div class="status-label">Proficiência</div>
+                        <div class="status-value">
+                            <div class="hp-display">{{proficiency}}</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- HABILIDADES -->
+                <div class="skills-grid">
+                    <!-- FÍSICO E COMBATE -->
+                    <div class="skill-category">
+                        <div class ="skill-category-header">
+                            <h4>FÍSICO E COMBATE <span>{{getPhysicalTotal()}}</span></h4>
+                            <div class="number-controls">
+                                <button (click)="increaseSkill(this.physicalSkill)">▲</button>
+                                <button (click)="decreaseSkill(this.physicalSkill)">▼</button>
+                            </div>
+                        </div>
+
+                        <div class="proficiency-item" *ngFor="let proficiency of physicalProficiencies">
+                            <span class="proficiency-name">{{proficiency.name}}
+                            <span class="proficiency-tooltip">?
+                            <span class="tooltip-text">{{proficiency.description}}</span>
+                            </span></span>
+                            <div class="proficiency-bonus">{{proficiency.value}}</div>
+                            <label class="checkbox-container">
+                                <input type="checkbox" 
+                                        [checked]="proficiency.isProficient" 
+                                        (change)="toggleProficiency(proficiency)">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- SOBREVIVÊNCIA E MEDICINA -->
+                    <div class="skill-category">
+                        <div class ="skill-category-header">
+                            <h4>SOBREVIVÊNCIA E MEDICINA <span>{{getSurvivalTotal()}}</span></h4>
+                            <div class="number-controls">
+                                <button (click)="increaseSkill(this.survivalSkill)">▲</button>
+                                <button (click)="decreaseSkill(this.survivalSkill)">▼</button>
+                            </div>
+                        </div>
+
+                        <div class="proficiency-item" *ngFor="let proficiency of survivalProficiencies">
+                            <span class="proficiency-name">{{proficiency.name}}
+                            <span class="proficiency-tooltip">?
+                            <span class="tooltip-text">{{proficiency.description}}</span>
+                            </span></span>
+                            <div class="proficiency-bonus">{{proficiency.value}}</div>
+                            <label class="checkbox-container">
+                                <input type="checkbox" 
+                                        [checked]="proficiency.isProficient" 
+                                        (change)="toggleProficiency(proficiency)">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- INTELIGÊNCIA E ESTRATÉGIA -->
+                    <div class="skill-category">
+                        <div class ="skill-category-header">
+                            <h4>INTELIGÊNCIA E ESTRATÉGIA <span>{{getIntelligenceTotal()}}</span></h4>
+                            <div class="number-controls">
+                                <button (click)="increaseSkill(this.intelligenceSkill)">▲</button>
+                                <button (click)="decreaseSkill(this.intelligenceSkill)">▼</button>
+                            </div>
+                        </div>
+
+                        <div class="proficiency-item" *ngFor="let proficiency of intelligenceProficiencies">
+                            <span class="proficiency-name">{{proficiency.name}}
+                            <span class="proficiency-tooltip">?
+                            <span class="tooltip-text">{{proficiency.description}}</span>
+                            </span></span>
+                            <div class="proficiency-bonus">{{proficiency.value}}</div>
+                            <label class="checkbox-container">
+                                <input type="checkbox" 
+                                        [checked]="proficiency.isProficient" 
+                                        (change)="toggleProficiency(proficiency)">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <!-- SABOTAGEM E CONSTRUÇÃO -->
+                    <div class="skill-category">
+                        <div class ="skill-category-header">
+                            <h4>SABOTAGEM E CONSTRUÇÃO <span>{{getSabotageTotal()}}</span></h4>
+                            <div class="number-controls">
+                                <button (click)="increaseSkill(this.sabotageSkill)">▲</button>
+                                <button (click)="decreaseSkill(this.sabotageSkill)">▼</button>
+                            </div>
+                        </div>
+
+                        <div class="proficiency-item" *ngFor="let proficiency of sabotageProficiencies">
+                            <span class="proficiency-name">{{proficiency.name}}
+                            <span class="proficiency-tooltip">?
+                            <span class="tooltip-text">{{proficiency.description}}</span>
+                            </span></span>
+                            <div class="proficiency-bonus">{{proficiency.value}}</div>
+                            <label class="checkbox-container">
+                                <input type="checkbox" 
+                                        [checked]="proficiency.isProficient" 
+                                        (change)="toggleProficiency(proficiency)">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <!-- INFLUÊNCIA E PSICOLOGIA -->
+                    <div class="skill-category">
+                        <div class ="skill-category-header">
+                            <h4>INFLUÊNCIA E PSICOLOGIA <span>{{getInfluenceTotal()}}</span></h4>
+                            <div class="number-controls">
+                                <button (click)="increaseSkill(this.influenceSkill)">▲</button>
+                                <button (click)="decreaseSkill(this.influenceSkill)">▼</button>
+                            </div>
+                        </div>
+
+                        <div class="proficiency-item" *ngFor="let proficiency of influenceProficiencies">
+                            <span class="proficiency-name">{{proficiency.name}}
+                            <span class="proficiency-tooltip">?
+                            <span class="tooltip-text">{{proficiency.description}}</span>
+                            </span></span>
+                            <div class="proficiency-bonus">{{proficiency.value}}</div>
+                            <label class="checkbox-container">
+                                <input type="checkbox" 
+                                        [checked]="proficiency.isProficient" 
+                                        (change)="toggleProficiency(proficiency)">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                    </div>
+                                
+                </div>
+            </div>
+            <!-- Ligações/Contatos -->
+            <div class="card">
+                <h3 class="card-title"><i class="fas fa-address-book"></i> Ligações/Contatos</h3>
+                <div class="contacts-grid">
+                    <div class="contact-item" *ngFor="let contact of contacts">
+                        <div class="form-group">
+                            <label>Nome do Contato</label>
+                            <input type="text" class="form-control" [(ngModel)]="contact.name" placeholder="Nome">
+                        </div>
+                        <div class="form-group">
+                            <label>Relação</label>
+                            <input type="text" class="form-control" [(ngModel)]="contact.relationship" placeholder="Relação">
+                        </div>
+                        <div class="form-group">
+                            <label>Localização</label>
+                            <input type="text" class="form-control" [(ngModel)]="contact.location" placeholder="Localização">
+                        </div>
+                        <button class="btn" (click)="removeContact(contact.id)" style="margin-top: 10px; width: 100%; background: linear-gradient(to bottom, #3a0a0a, #1a0a0a);">
+                            <i class="fas fa-trash"></i> Remover Contato
+                        </button>
+                    </div>
+                </div>
+                <button class="btn" id="addContactBtn" (click)="addContact()" style="margin-top: 15px;">
+                    <i class="fas fa-plus"></i> Adicionar Contato
+                </button>
+            </div>
+        </div>
+        <button class="print-button" (click)="printSheet()">Imprimir Ficha</button>
+        <footer class="footer">
+            <p>Guerrilha Urbana - RPG</p>
+            <p>Sistema de rpg inspirado no livro manual do guerrilheiro urbano</p>
+        </footer>
+    </div>
+</div> 
