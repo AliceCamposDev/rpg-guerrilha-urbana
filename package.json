@@ -2,6 +2,8 @@
   "name": "rpg-guerrilha-urbana",
   "version": "0.0.0",
   "scripts": {
+    "build:prod": "ng build --configuration production",
+    "deploy": "ng build --configuration production --base-href=\"/rpg-guerrilha-urbana/\" && npx angular-cli-ghpages --dir=dist/rpg-guerrilha-urbana",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
@@ -36,6 +38,7 @@
     "@angular/build": "^21.0.5",
     "@angular/cli": "^21.0.5",
     "@angular/compiler-cli": "^21.0.0",
+    "angular-cli-ghpages": "^3.0.2",
     "jsdom": "^27.1.0",
     "typescript": "~5.9.2",
     "vitest": "^4.0.8"
