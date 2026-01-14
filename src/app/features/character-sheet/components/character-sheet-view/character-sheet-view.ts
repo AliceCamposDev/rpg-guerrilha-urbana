@@ -109,7 +109,7 @@ export class CharacterSheetView implements OnInit {
   // Contatos
   contacts: Contact[] = [
     { id: 1, name: 'Mário Prata', relationship: 'Companheiro de organização', location: 'São Paulo' },
-    { id: 2, name: 'Carlos Lamarca', relationship: 'Líder da ALN', location: 'Vale do Ribeira' }
+    { id: 2, name: 'Carlos Lamarca', relationship: 'Líder da VPR', location: 'Vale do Ribeira' }
   ];
 
   nextContactId: number = 3;
@@ -139,7 +139,7 @@ export class CharacterSheetView implements OnInit {
   }
 
   updateProficiencyBonus(): void {
-    this.proficiency = Math.floor((this.level + 1) / 4) + 2;
+    this.proficiency = Math.min(Math.max(Math.floor((this.level + 1) / 4) + 2, 2), 6);
     this.updateAllProficiencies();
   }
 

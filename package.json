@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "build:prod": "ng build --configuration production",
-    "deploy": "ng build --configuration production --base-href=\"/rpg-guerrilha-urbana/\" && npx angular-cli-ghpages --dir=dist/rpg-guerrilha-urbana",
+    "deploy": "ng build --configuration production --base-href=\"/rpg-guerrilha-urbana/\" && npx angular-cli-ghpages --dir=dist/rpg-guerrilha-urbana/browser",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
