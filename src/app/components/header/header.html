@@ -1,0 +1,29 @@
+<header class="site-header">
+    <div class="header-container">
+        <div class="logo">
+            <a href="/">
+                <div class="logo-simbolo">☭</div>
+                <div class="logo-texto">
+                    <div class="logo-titulo">Guerrilha Urbana</div>
+                    <div class="logo-subtitulo">RPG DE RESISTÊNCIA</div>
+                </div>
+            </a>
+        </div>
+        
+        <nav class="nav-principal" aria-label="Navegação principal">
+            <ul class="nav-lista">
+                <li class="nav-item"><a href="/" class="nav-link ativo"  [class.ativo]="router.url === '/'">Material do Jogo</a></li>
+                <li class="nav-item"><a href="character-sheet" class="nav-link">Ficha</a></li>
+                <li class="nav-item"><a href="organizacao.html" class="nav-link">Organização</a></li>
+                <li class="nav-item"><a href="livro.html" class="nav-link" [class.ativo]="router.url === '/book'">Livro de Regras</a></li>
+            </ul>
+        </nav>
+        
+        <div class="btn-material-container">
+            <a href="manual.pdf" class="btn-material" download>
+                <span class="btn-texto">Baixar Livro</span>
+                <span class="btn-vers">🔒 V0.1 - beta</span>
+            </a>
+        </div>
+    </div>
+</header>

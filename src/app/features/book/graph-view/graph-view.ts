@@ -4,7 +4,8 @@ import {
   AfterViewInit,
   ElementRef,
   ViewChild,
-  Input,
+  Output,
+  EventEmitter,
   OnChanges,
 } from '@angular/core';
 import cytoscape, { Core } from 'cytoscape';
@@ -22,6 +23,8 @@ import { CommonModule } from '@angular/common';
 export class GraphViewerComponent implements OnInit, AfterViewInit {
   @ViewChild('graphContainer') graphContainer!: ElementRef;
 
+  @Output() noteSelected = new EventEmitter<string>();
+  selectedNodeId: string | null = null; 
   private cy!: Core;
   loading = true;
   error: string | null = null;
@@ -33,11 +36,11 @@ export class GraphViewerComponent implements OnInit, AfterViewInit {
     idealEdgeLength: 100,
     nodeOverlap: 20,
     refresh: 20,
-    fit: true,
+    fit: false,
     padding: 50,
     randomize: true,
     componentSpacing: 100,
-    nodeRepulsion: 300000,
+    nodeRepulsion: 2500000,
     edgeElasticity: 100,
     nestingFactor: 5,
     gravity: 0,
@@ -164,13 +167,15 @@ export class GraphViewerComponent implements OnInit, AfterViewInit {
         style: {
           'label': 'data(label)',
           'text-valign': 'center',
-          'text-halign': 'center',
-          'font-size': '10px',
-          'width': '30px',
-          'background-color': '#7c0000ff',
+          'text-align': 'center',
+          'text-weight': 'bold', 
+          'font-size': '20px',
+          'width': '80px',
+          'height': '80px',
+          'background-color': 'rgba(99, 0, 0, 1)',
           'color': '#ffffff',
           'text-wrap': 'wrap',
-          'text-max-width': '70px',
+          'text-max-width': '300px',
           'opacity': '1',
         },
       },
@@ -235,20 +240,24 @@ export class GraphViewerComponent implements OnInit, AfterViewInit {
 
     // Click para selecionar
     this.cy.on('tap', 'node', (evt) => {
-      const node = evt.target;
-      const nodeId = node.id();
-
-      // Dispara evento customizado para outros componentes ouvirem
-      const event = new CustomEvent('nodeSelected', {
-        detail: { nodeId: nodeId.replace('.md', '') },
-        bubbles: true,
-      });
-      this.graphContainer.nativeElement.dispatchEvent(event);
-
-      // Destaca o nó e suas conexões
-      this.cy.elements().removeClass('highlighted');
-      node.addClass('highlighted');
-      node.neighborhood().addClass('highlighted');
+        const node = evt.target;
+        const nodeId = node.id();
+        const noteName = nodeId.replace('.md', '');  // Extrai nome limpo
+        
+        // Remove destaque anterior
+        this.cy.elements().removeClass('highlighted');
+        
+        // Destaca o nó clicado e suas conexões
+        node.addClass('highlighted');
+        node.neighborhood().addClass('highlighted');
+        
+        // Atualiza o nó selecionado
+        this.selectedNodeId = nodeId;
+        
+        // EMITE O EVENTO PARA O COMPONENTE PAI  ← AÇÃO PRINCIPAL
+        this.noteSelected.emit(noteName);
+        
+        console.log('Nota selecionada:', noteName);
     });
 
     // Zoom com roda do mouse

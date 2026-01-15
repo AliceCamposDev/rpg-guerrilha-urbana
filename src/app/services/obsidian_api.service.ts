@@ -20,7 +20,7 @@ export class ApiService {
   }
 
   getNoteContent(noteName: string): Observable<Note> {
-    return this.http.get<Note>(`${this.apiUrl}/note/${encodeURIComponent(noteName)}`);
+    return this.http.get<Note>(`${this.apiUrl}/api/note/${encodeURIComponent(noteName)}`);
   }
 
 //   searchNotes(query: string): Observable<any[]> {

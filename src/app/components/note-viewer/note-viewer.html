@@ -1,0 +1,33 @@
+<div class="note-viewer">
+  <div class="note-header" *ngIf="noteName">
+    <h3>{{ noteName }}</h3>
+    <div class="note-meta" *ngIf="noteMetadata">
+      <span class="meta-item" *ngIf="noteMetadata.word_count">
+        📝 {{ noteMetadata.word_count }} palavras
+      </span>
+      <span class="meta-item" *ngIf="noteMetadata.backlinks_count">
+        🔗 {{ noteMetadata.backlinks_count }} backlinks
+      </span>
+      <span class="meta-item" *ngIf="noteMetadata.modified">
+        📅 {{ noteMetadata.modified | date:'dd/MM/yyyy HH:mm' }}
+      </span>
+    </div>
+  </div>
+  
+  <div class="loading" *ngIf="isLoading">
+    <div class="spinner-small"></div>
+    <p>Carregando conteúdo...</p>
+  </div>
+  
+  <div class="error" *ngIf="error && !isLoading">
+    <p>❌ {{ error }}</p>
+  </div>
+  
+  <div class="note-content" *ngIf="noteContent && !isLoading">
+    <div [innerHTML]="formatContent(noteContent)"></div>
+  </div>
+  
+  <div class="empty-state" *ngIf="!noteName && !isLoading && !error">
+    <p>👈 Clique em um nó do gráfico para ver o conteúdo da nota</p>
+  </div>
+</div>
