@@ -1,0 +1,239 @@
+{
+  "main": {
+    "id": "0f74b4a2647e6d30",
+    "type": "split",
+    "children": [
+      {
+        "id": "faab866a3869e5bb",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "255218e6850c7077",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "02 - definição do guerrilheiro urbano/definição do guerrilheiro urbano.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "definição do guerrilheiro urbano"
+            }
+          },
+          {
+            "id": "3d0372e06cd2187a",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "02 - definição do guerrilheiro urbano/definição do guerrilheiro urbano.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "definição do guerrilheiro urbano"
+            }
+          },
+          {
+            "id": "29e2d5ddc34a3414",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "02 - definição do guerrilheiro urbano/definição do guerrilheiro urbano.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "definição do guerrilheiro urbano"
+            }
+          },
+          {
+            "id": "42a210e37b7e8956",
+            "type": "leaf",
+            "state": {
+              "type": "graph",
+              "state": {},
+              "icon": "lucide-git-fork",
+              "title": "Graph view"
+            }
+          }
+        ],
+        "currentTab": 3
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "d6061c7932540775",
+    "type": "split",
+    "children": [
+      {
+        "id": "9a349124ab72cf14",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "666be0d3da7d4118",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "4dc19dcf3701fa0b",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "bf95827eab56964f",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "e151e0535783a40e",
+    "type": "split",
+    "children": [
+      {
+        "id": "d6780b3eb3de1178",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "92bd74b352190f60",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks"
+            }
+          },
+          {
+            "id": "8a62baa179374785",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links"
+            }
+          },
+          {
+            "id": "d2dbda8c771e16c7",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "bb6125dcb4793b31",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "e1e2bc927a2204c1",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "42a210e37b7e8956",
+  "lastOpenFiles": [
+    "02 - definição do guerrilheiro urbano/Ficha do guerrilheiro urbano.md",
+    "02 - definição do guerrilheiro urbano/definição do guerrilheiro urbano.md",
+    "01 - intro/intro.md",
+    "ALN.md",
+    "Operação bandeirante (OBAN).md",
+    "Untitled",
+    "(fontes)fontes de estudos gerais para a criação do sistema.md",
+    "alta burguesia brasileira.md",
+    "fontes de estudos gerais para a criação do sistema.md",
+    "fontes variadas e desorganizadas.md",
+    "livros recomendados por Marighella.md",
+    "Manual do Guerrilheiro Urbano.md",
+    "citações/inimigos do povo.md",
+    "citações"
+  ]
+}

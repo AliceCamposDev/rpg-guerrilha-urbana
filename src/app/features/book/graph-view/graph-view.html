@@ -1,0 +1,42 @@
+<div class="graph-container">
+    <div class="graph-controls">
+        <div class="stats" *ngIf="graphData">
+            <span class="stat-badge"> 📝 {{ graphData.stats.total_notes }} notas </span>
+            <span class="stat-badge">
+                🔗 {{ graphData.stats.total_links }} conexões
+            </span>
+        </div>
+        <div class="controls">
+            <button class="btn-control" (click)="fitGraph()" title="Centralizar">🎯</button>
+            <button class="btn-control" (click)="resetGraph()" title="Redefinir">🔄</button>
+        </div>
+    </div>
+
+
+    <div class="error-alert" *ngIf="error && !loading">
+        <div class="alert-content">
+            <span>❌ {{ error }}</span>
+            <button class="btn-retry" (click)="loadGraph()">Tentar novamente</button>
+        </div>
+    </div>
+
+    <div #graphContainer id="cytoscape-graph" class="graph-area"></div>
+
+    <div class="graph-legend">
+        <div class="legend-item">
+            <div class="legend-color" style="background-color: #93c5fd"></div>
+            <span>Poucas conexões</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background-color: #3b82f6"></div>
+            <span>Médias conexões</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background-color: #1e40af"></div>
+            <span>Muitas conexões</span>
+        </div>
+        <div class="legend-hint">
+            🖱️ Clique em um nó para ver detalhes • Arraste para navegar • 🔍 Roda do mouse para zoom
+        </div>
+    </div>
+</div>
