@@ -13,16 +13,5 @@ import { Header } from './components/header/header';
 export class App {
   protected readonly title = signal('rpg-guerrilha-urbana');
 
-  selectedNoteName: string | null = null;
-  noteContent: string = '';
-  isLoading: boolean = false;
-
-  onNoteSelected(noteName: string): void {
-  console.log('📩 Evento recebido no pai:', noteName);
-  this.selectedNoteName = noteName;
-    
-    // Opcional: carregar conteúdo automaticamente
-    // this.loadNoteContent();
-  }
 }
 
