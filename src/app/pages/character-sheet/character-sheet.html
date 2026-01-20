@@ -6,7 +6,29 @@
         </header>
 
         <div class="character-sheet">
-            <div class="card">
+            <div class="skill-category" *ngFor="let skill of newSheet.skills | keyvalue">
+                <div class="skill-category-header">
+                    <h4>{{ skill.value.name }} <span>{{getSkillTotal(skill.value.id)}}</span></h4>
+                    <div class="number-controls">
+                        <button (click)="increaseSkill(skill.value)">▲</button>
+                        <button (click)="decreaseSkill(skill.value)">▼</button>
+                    </div>
+                </div>
+
+                <div class="proficiency-item" *ngFor="let proficiency of newSheet.proficiencies | filterBySkill:skill.value.id">
+                    <span class="proficiency-name">{{proficiency.name}}
+                        <span class="proficiency-tooltip">?
+                            <span class="tooltip-text">{{proficiency.description}}</span>
+                        </span></span>
+                    <div class="proficiency-bonus">{{proficiency.value}}</div>
+                    <label class="checkbox-container">
+                        <input type="checkbox" [checked]="proficiency.isProficient"
+                            (change)="toggleProficiency(proficiency)">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+            </div>
+            <!-- <div class="card">
                 <h3 class="card-title"><i class="fas fa-user"></i> Dados Básicos</h3>
                 
                 <div class="form-group">
@@ -59,13 +81,13 @@
                             [(ngModel)]="characterBackground" 
                             placeholder="Marilena Villas Boas Pinto, nascida em 8 de julho de 1948 no Rio de Janeiro, era descendente da aristocracia brasileira..."></textarea>
                 </div>
-            </div>
-            
+            </div> -->
+
             <div class="card">
-                <h3 class="card-title"><i class="fas fa-cogs"></i> Habilidades e Status</h3>    
-                
+                <h3 class="card-title"><i class="fas fa-cogs"></i> Habilidades e Status</h3>
+
                 <!-- Status do Personagem -->
-                <div class="character-status">
+                <!-- <div class="character-status">
                     <div class="status-item">
                         <div class="status-label">Pontos de Vida</div>
                         <div class="status-value">
@@ -91,12 +113,12 @@
                             <div class="hp-display">{{proficiency}}</div>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
                 <!-- HABILIDADES -->
                 <div class="skills-grid">
                     <!-- FÍSICO E COMBATE -->
-                    <div class="skill-category">
+                    <!-- <div class="skill-category">
                         <div class ="skill-category-header">
                             <h4>FÍSICO E COMBATE <span>{{getPhysicalTotal()}}</span></h4>
                             <div class="number-controls">
@@ -120,7 +142,6 @@
                         </div>
                     </div>
                     
-                    <!-- SOBREVIVÊNCIA E MEDICINA -->
                     <div class="skill-category">
                         <div class ="skill-category-header">
                             <h4>SOBREVIVÊNCIA E MEDICINA <span>{{getSurvivalTotal()}}</span></h4>
@@ -145,83 +166,12 @@
                         </div>
                     </div>
                     
-                    <!-- INTELIGÊNCIA E ESTRATÉGIA -->
                     <div class="skill-category">
                         <div class ="skill-category-header">
-                            <h4>INTELIGÊNCIA E ESTRATÉGIA <span>{{getIntelligenceTotal()}}</span></h4>
-                            <div class="number-controls">
-                                <button (click)="increaseSkill(this.intelligenceSkill)">▲</button>
-                                <button (click)="decreaseSkill(this.intelligenceSkill)">▼</button>
-                            </div>
-                        </div>
-
-                        <div class="proficiency-item" *ngFor="let proficiency of intelligenceProficiencies">
-                            <span class="proficiency-name">{{proficiency.name}}
-                            <span class="proficiency-tooltip">?
-                            <span class="tooltip-text">{{proficiency.description}}</span>
-                            </span></span>
-                            <div class="proficiency-bonus">{{proficiency.value}}</div>
-                            <label class="checkbox-container">
-                                <input type="checkbox" 
-                                        [checked]="proficiency.isProficient" 
-                                        (change)="toggleProficiency(proficiency)">
-                                <span class="checkmark"></span>
-                            </label>
-                        </div>
-                    </div>
-                    <!-- SABOTAGEM E CONSTRUÇÃO -->
-                    <div class="skill-category">
-                        <div class ="skill-category-header">
-                            <h4>SABOTAGEM E CONSTRUÇÃO <span>{{getSabotageTotal()}}</span></h4>
-                            <div class="number-controls">
-                                <button (click)="increaseSkill(this.sabotageSkill)">▲</button>
-                                <button (click)="decreaseSkill(this.sabotageSkill)">▼</button>
-                            </div>
-                        </div>
-
-                        <div class="proficiency-item" *ngFor="let proficiency of sabotageProficiencies">
-                            <span class="proficiency-name">{{proficiency.name}}
-                            <span class="proficiency-tooltip">?
-                            <span class="tooltip-text">{{proficiency.description}}</span>
-                            </span></span>
-                            <div class="proficiency-bonus">{{proficiency.value}}</div>
-                            <label class="checkbox-container">
-                                <input type="checkbox" 
-                                        [checked]="proficiency.isProficient" 
-                                        (change)="toggleProficiency(proficiency)">
-                                <span class="checkmark"></span>
-                            </label>
-                        </div>
-                    </div>
-                    <!-- INFLUÊNCIA E PSICOLOGIA -->
-                    <div class="skill-category">
-                        <div class ="skill-category-header">
-                            <h4>INFLUÊNCIA E PSICOLOGIA <span>{{getInfluenceTotal()}}</span></h4>
-                            <div class="number-controls">
-                                <button (click)="increaseSkill(this.influenceSkill)">▲</button>
-                                <button (click)="decreaseSkill(this.influenceSkill)">▼</button>
-                            </div>
-                        </div>
-
-                        <div class="proficiency-item" *ngFor="let proficiency of influenceProficiencies">
-                            <span class="proficiency-name">{{proficiency.name}}
-                            <span class="proficiency-tooltip">?
-                            <span class="tooltip-text">{{proficiency.description}}</span>
-                            </span></span>
-                            <div class="proficiency-bonus">{{proficiency.value}}</div>
-                            <label class="checkbox-container">
-                                <input type="checkbox" 
-                                        [checked]="proficiency.isProficient" 
-                                        (change)="toggleProficiency(proficiency)">
-                                <span class="checkmark"></span>
-                            </label>
-                        </div>
-                    </div>
-                                
-                </div>
             </div>
-            <!-- Ligações/Contatos -->
-            <div class="card">
+        </div>
+        <!-- Ligações/Contatos -->
+                    <!-- <div class="card">
                 <h3 class="card-title"><i class="fas fa-address-book"></i> Ligações/Contatos</h3>
                 <div class="contacts-grid">
                     <div class="contact-item" *ngFor="let contact of contacts">
@@ -246,11 +196,11 @@
                     <i class="fas fa-plus"></i> Adicionar Contato
                 </button>
             </div>
-        </div>
-        <button class="print-button">Imprimir Ficha</button>
-        <footer class="footer">
-            <p>Guerrilha Urbana - RPG</p>
-            <p>Sistema de rpg inspirado no livro manual do guerrilheiro urbano</p>
-        </footer>
-    </div>
-</div> 
+        </div> -->
+                    <button class="print-button">Imprimir Ficha</button>
+                    <footer class="footer">
+                        <p>Guerrilha Urbana - RPG</p>
+                        <p>Sistema de rpg inspirado no livro manual do guerrilheiro urbano</p>
+                    </footer>
+                </div>
+            </div>
