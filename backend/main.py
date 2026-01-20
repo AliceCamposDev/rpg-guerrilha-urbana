@@ -3,35 +3,34 @@ from fastapi.responses import HTMLResponse
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.templating import Jinja2Templates
 from contextlib import asynccontextmanager
-from utils import CustomJSONEncoder
 from config import init_vault
+from config import get_logger
 from routes import graph, notes, health
+
+logger = get_logger()
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Lifespan context manager"""
-    print("Iniciando aplicação...")
+    logger.info("Iniciando aplicação...")
     try:
         init_vault()
     except Exception as e:
-        print(f"Vault não carregado: {e}")
+        logger.error(f"Vault não carregado: {e}")
     yield
-    print("Encerrando aplicação...")
+    logger.info("Encerrando aplicação...")
 
-# Criar aplicação FastAPI
+
 app = FastAPI(
     title="Obsidian Vault API",
     description="API para visualizar e navegar pelo seu vault Obsidian",
     version="1.0.0",
     docs_url="/api/docs",
     redoc_url="/api/redoc",
-    lifespan=lifespan
+    lifespan=lifespan,
 )
 
-# Configurar encoder JSON
-app.json_encoder = CustomJSONEncoder
-
-# Configurar CORS
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -39,21 +38,20 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Montar arquivos estáticos
 
-# Configurar templates
 templates = Jinja2Templates(directory="backend/templates")
 
-# Incluir rotas
 app.include_router(graph.router, prefix="/api")
 app.include_router(notes.router, prefix="/api")
 # app.include_router(search.router, prefix="/api")
 app.include_router(health.router, prefix="/api")
 
+
 @app.get("/", response_class=HTMLResponse)
 async def root(request: Request):
-    """Página inicial com Swagger personalizado"""
+    """Página inicial com Swagger de cria"""
     return templates.TemplateResponse("index.html", {"request": request})
+
 
 @app.get("/api")
 async def api_root():
@@ -65,11 +63,8 @@ async def api_root():
             "/api/notes": "Lista todas as notas",
             "/api/note/{note_name}": "Retorna conteúdo de uma nota específica",
             "/api/health": "Verifica o status do servidor",
+            "/api/search": "Busca notas por termo",
             "/api/docs": "Documentação Swagger",
-            "/api/redoc": "Documentação ReDoc"
-        }
+            "/api/redoc": "Documentação ReDoc",
+        },
     }
-
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)

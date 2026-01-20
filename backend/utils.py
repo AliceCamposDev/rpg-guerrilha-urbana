@@ -1,28 +1,13 @@
-import json
 import math
-import pandas as pd
 
-class CustomJSONEncoder(json.JSONEncoder):
-    """Encoder JSON personalizado para lidar com NaN, Inf, etc."""
-    def encode(self, obj):
-        return super().encode(self.default(obj))
-    
-    def default(self, obj):
-        if isinstance(obj, float):
-            if math.isnan(obj) or math.isinf(obj):
-                return None
-        try:
-            return super().default(obj)
-        except TypeError:
-            return str(obj)
 
 def clean_dataframe_for_json(df):
     """Limpa um DataFrame pandas para serialização JSON"""
     if df is None:
         return []
-    
+
     records = df.to_dict(orient="records")
-    
+
     def clean_nested(obj):
         if isinstance(obj, dict):
             return {k: clean_nested(v) for k, v in obj.items()}
@@ -34,5 +19,5 @@ def clean_dataframe_for_json(df):
             return obj
         else:
             return str(obj)
-    
+
     return [clean_nested(record) for record in records]

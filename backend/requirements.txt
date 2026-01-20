@@ -1,1 +1,5 @@
 obsidiantools
+uvicorn
+fastapi
+jinja2
+pyyaml
