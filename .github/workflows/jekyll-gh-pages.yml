@@ -60,4 +60,4 @@ jobs:
         uses: actions/deploy-pages@v4
         with:
           branch: github-pages
-          folder: dist/browser
+          folder: dist/rpg-guerrilha-urbana
