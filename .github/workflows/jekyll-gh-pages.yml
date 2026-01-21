@@ -37,18 +37,11 @@ jobs:
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
-      # - name: Build with Jekyll
-      #   uses: actions/jekyll-build-pages@v1
-      #   with:
-      #     source: ./
-      #     destination: ./_site
-      # - name: Upload artifact
-      #   uses: actions/upload-pages-artifact@v3
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: ./dist/rpg-guerrilha-urbana
           name: github-pages
           retention-days: 1
       - name: Setup Node.js
@@ -72,5 +65,4 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
         with:
-          branch: github-pages
           artifact_name: github-pages
