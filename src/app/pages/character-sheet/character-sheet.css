@@ -1,0 +1,708 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.background {
+    background-color: #140101;
+    background-image: 
+        radial-gradient(circle at 15% 50%, rgba(85, 0, 0, 0.1) 0%, transparent 30%),
+        radial-gradient(circle at 85% 30%, rgba(178, 34, 34, 0.1) 0%, transparent 25%),
+        repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(90, 0, 0, 0.05) 2px, rgba(90, 0, 0, 0.05) 4px);
+    color: #f0e6d2;
+    line-height: 1.6;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: rgba(20, 10, 10, 0.85);
+    border-radius: 5px;
+    box-shadow: 0 0 30px rgba(139, 0, 0, 0.2);
+    border: 1px solid #8b0000;
+    overflow: hidden;
+    position: relative;
+}
+
+.container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, 
+        transparent 10%, 
+        #8b0000 10%, 
+        #8b0000 90%, 
+        transparent 90%);
+    z-index: 10;
+}
+
+/* Cabeçalho */
+.header {
+    background: linear-gradient(to bottom, #450000, #300000);
+    padding: 25px 20px;
+    text-align: center;
+    border-bottom: 3px solid #8b0000;
+    position: relative;
+    overflow: hidden;
+}
+
+.header::before {
+    position: absolute;
+    font-size: 120px;
+    opacity: 0.05;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+}
+
+.header h1 {
+    color: #ffcccb;
+    font-size: 2.2rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    position: relative;
+    z-index: 1;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    border-bottom: 1px dashed #8b0000;
+    padding-bottom: 10px;
+    display: inline-block;
+}
+
+.header h2 {
+    color: #d4a76a;
+    font-size: 1.5rem;
+    font-weight: normal;
+    font-style: italic;
+    position: relative;
+    z-index: 1;
+}
+
+/* Área principal da ficha */
+.character-sheet {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 25px;
+}
+
+/* Cartões */
+.card {
+    background-color: rgba(40, 15, 15, 0.9);
+    border-radius: 4px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    border-left: 5px solid #8b0000;
+    border-right: 1px solid #3a0a0a;
+    border-top: 1px solid #3a0a0a;
+    border-bottom: 1px solid #3a0a0a;
+    position: relative;
+    overflow: hidden;
+}
+
+.card::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(139, 0, 0, 0.2);
+    clip-path: polygon(100% 0, 0 0, 100% 100%);
+}
+
+.card-title {
+    text-align: center;
+    color: #d4a76a;
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #8b0000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.card-title i {
+    margin-right: 10px;
+    color: #8b0000;
+}
+
+/* Formulários */
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    color: #d4a76a;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px 15px;
+    background-color: rgba(60, 20, 20, 0.8);
+    border: 1px solid #5a1a1a;
+    border-radius: 3px;
+    color: #f0e6d2;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #8b0000;
+    box-shadow: 0 0 0 2px rgba(139, 0, 0, 0.3);
+}
+
+textarea.form-control {
+    min-height: 100px;
+    resize: vertical;
+    line-height: 1.5;
+}
+
+/* Status do Personagem */
+.character-status {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 25px;
+    padding: 15px;
+    background-color: rgba(30, 10, 10, 0.7);
+    border-radius: 4px;
+    border: 1px solid #5a1a1a;
+}
+
+.status-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.status-label {
+    color: #d4a76a;
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.status-value {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-align: center;
+    justify-content: center;
+}
+
+.hp-display {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ffcccb;
+    min-width: 40px;
+    text-align: center;
+    align-items: center;
+}
+
+.number-input {
+    width: 70px;
+    padding: 8px;
+    background-color: rgba(80, 20, 20, 0.9);
+    border: 1px solid #8b0000;
+    border-radius: 3px;
+    color: #f0e6d2;
+    font-weight: bold;
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+/* Remove as setinhas dos inputs number em alguns navegadores */
+.number-input::-webkit-outer-spin-button,
+.number-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.number-input[type=number] {
+    -moz-appearance: textfield;
+}
+
+.number-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+
+.number-controls button {
+    background: #8b0000;
+    border: none;
+    color: #f0e6d2;
+    width: 24px;
+    height: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+}
+
+.number-controls button:hover {
+    background: #9b0000;
+}
+
+.number-controls button:first-child {
+    border-radius: 3px 3px 0 0;
+}
+
+.number-controls button:last-child {
+    border-radius: 0 0 3px 3px;
+}
+
+.progress-bar {
+    height: 10px;
+    background-color: rgba(60, 20, 20, 0.8);
+    border-radius: 5px;
+    margin-top: 8px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(to right, #5a1a1a, #8b0000);
+    border-radius: 5px;
+    transition: width 0.5s ease;
+}
+
+/* Habilidades */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.skill-category {
+    background-color: rgba(50, 15, 15, 0.7);
+    padding: 15px;
+    border-radius: 4px;
+    border: 1px solid #5a1a1a;
+}
+
+.skill-category-header {
+    color: #8b0000;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: space-around;
+    margin-bottom: 30px;
+    backdrop-filter: blur(30px);
+}
+.skill-category h4 {
+    letter-spacing: 0.5px;
+    font-size: 1.1rem;
+    height: 100%;
+    align-items: center;
+    text-align: center;
+}
+
+.skill-category h4::after{
+    content: "";
+    width: 100%;
+    display: block;
+    text-align: center;
+    align-items: center;
+    height: 3px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed #8b0000;
+}
+
+.skill-category h4 span {
+    background-color: #8b0000;
+    color: #f0e6d2;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 0.9rem;
+}
+
+.skill-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px dotted rgba(139, 0, 0, 0.3);
+}
+
+.skill-item:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.skill-name {
+    color: #f0e6d2;
+    font-size: 0.95rem;
+    flex-grow: 1;
+}
+
+.skill-value {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.skill-input {
+    width: 60px;
+    padding: 6px 8px;
+    background-color: rgba(80, 20, 20, 0.9);
+    border: 1px solid #8b0000;
+    border-radius: 3px;
+    color: #f0e6d2;
+    text-align: center;
+    font-weight: bold;
+}
+
+.skill-input::-webkit-outer-spin-button,
+.skill-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.skill-input[type=number] {
+    -moz-appearance: textfield;
+}
+
+/* Perícias */
+.proficiencies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.proficiency-category {
+    background-color: rgba(40, 15, 15, 0.8);
+    padding: 15px;
+    border-radius: 4px;
+    border: 1px solid #5a1a1a;
+}
+
+.proficiency-category h4 {
+    color: #d4a76a;
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed #8b0000;
+    letter-spacing: 0.5px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.proficiency-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px dotted rgba(139, 0, 0, 0.3);
+}
+
+.proficiency-item:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.proficiency-name {
+    color: #f0e6d2;
+    font-size: 0.95rem;
+    flex-grow: 1;
+}
+
+.proficiency-value {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.proficiency-bonus {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #ffcccb;
+    min-width: 30px;
+    text-align: center;
+}
+
+/* Checkbox estilo customizado */
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.checkbox-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkmark {
+    position: relative;
+    height: 20px;
+    width: 20px;
+    background-color: rgba(80, 20, 20, 0.9);
+    border: 1px solid #8b0000;
+    border-radius: 3px;
+    transition: all 0.3s;
+}
+
+.checkbox-container:hover input ~ .checkmark {
+    background-color: rgba(100, 30, 30, 0.9);
+}
+
+.checkbox-container input:checked ~ .checkmark {
+    background-color: #8b0000;
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.checkbox-container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+.checkbox-container .checkmark:after {
+    left: 6px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+}
+
+/* Botões */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 20px;
+    background: linear-gradient(to bottom, #8b0000, #5a0000);
+    color: #f0e6d2;
+    border: none;
+    border-radius: 3px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn:hover {
+    background: linear-gradient(to bottom, #9b0000, #6a0000);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn i {
+    margin-right: 8px;
+}
+
+#addContactBtn {
+    width: 100%;
+    background: linear-gradient(to bottom, #5a1a1a, #3a0a0a);
+}
+
+#addContactBtn:hover {
+    background: linear-gradient(to bottom, #6a2a2a, #4a1a1a);
+}
+
+/* Rodapé */
+.footer {
+    background: linear-gradient(to top, #300000, #450000);
+    padding: 20px;
+    text-align: center;
+    border-top: 3px solid #8b0000;
+    margin-top: 20px;
+}
+
+.footer p {
+    color: #d4a76a;
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+}
+
+.footer p:last-child {
+    margin-bottom: 0;
+    color: #8b0000;
+    font-style: italic;
+    font-size: 0.85rem;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .skills-grid, .proficiencies-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .character-status {
+        grid-template-columns: 1fr;
+    }
+    
+    .contacts-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .header h2 {
+        font-size: 1.2rem;
+    }
+    
+    .card-title {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+    
+    .character-sheet {
+        padding: 15px;
+    }
+    
+    .card {
+        padding: 15px;
+    }
+    
+    .header {
+        padding: 15px 10px;
+    }
+    
+    .header h1 {
+        font-size: 1.5rem;
+    }
+}
+
+/* Estilos para os contatos */
+.contacts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 15px;
+}
+
+.contact-item {
+    background-color: rgba(60, 20, 20, 0.7);
+    padding: 15px;
+    border-radius: 4px;
+    border-left: 3px solid #8b0000;
+}
+
+.contact-name {
+    color: #d4a76a;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.contact-info {
+    color: #f0e6d2;
+    font-size: 0.9rem;
+    margin-bottom: 3px;
+}
+
+/* Estilo para campos de data */
+input[type="date"] {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Scrollbar personalizada */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(40, 15, 15, 0.9);
+}
+
+::-webkit-scrollbar-thumb {
+    background: #8b0000;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #9b0000;
+}
+
+/* Tooltip para perícias */
+.proficiency-tooltip {
+    position: relative;
+    display: inline-block;
+    margin-left: 5px;
+    color: #8b0000;
+    cursor: help;
+}
+
+.proficiency-tooltip .tooltip-text {
+    visibility: hidden;
+    width: 200px;
+    background-color: rgba(30, 10, 10, 0.95);
+    color: #f0e6d2;
+    text-align: center;
+    border-radius: 4px;
+    padding: 8px;
+    border: 1px solid #8b0000;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 0.85rem;
+    font-weight: normal;
+}
+
+.proficiency-tooltip:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
+.proficiency-tooltip .tooltip-text::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #8b0000 transparent transparent transparent;
+}

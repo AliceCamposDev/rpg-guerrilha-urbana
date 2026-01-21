@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 //models
 import { ISkill, IProficiency, IContact, ICharacterSheet } from '../../models/sheet.model';
 //constants
 import { physicalSkill, survivalSkill, intelligenceSkill, sabotageSkill, influenceSkill, allSkills} from '../../constants/skills.constants';
 import { physicalProficiencies, survivalProficiencies, intelligenceProficiencies, sabotageProficiencies, influenceProficiencies } from '../../constants/proficiencies.constants';
-
+//pipes
 import { FilterBySkillPipe } from '../../pipes/filter-by-skill-pipe';
 @Component({
   selector: 'app-character-sheet',
-  imports: [CommonModule, FilterBySkillPipe],
+  imports: [CommonModule, FormsModule, FilterBySkillPipe],
   templateUrl: './character-sheet.html',
   styleUrl: './character-sheet.css',
 })
@@ -20,13 +21,13 @@ export class CharacterSheet implements OnInit {
     name: '',
     codename: '',
     occupation: '',
-    age: 0,
-    joinDate: '',
+    age: 22,
+    joinDate: '1970-05-11',
     joinReason: '',
     howWillHelp: '',
     background: '',
     level: 1,
-    proficiency_bonus: 2,
+    proficiencyBonus: 2,
     hp: 10,
     skills: {
       physicalSkill: physicalSkill,
@@ -58,8 +59,6 @@ export class CharacterSheet implements OnInit {
     return skill ? skill.name : 'Desconhecido';
   }
 
-
-  //TODO: revisar isso agui
   toggleProficiency(proficiency: IProficiency): void {
     for (let prof of this.newSheet.proficiencies) {
       if (prof.id === proficiency.id) {
@@ -78,11 +77,62 @@ export class CharacterSheet implements OnInit {
   updateProficiencyValue(proficiency: IProficiency): void {
     for (let skill of Object.values(this.newSheet.skills)){
       if (skill.id === proficiency.skillId) {
-        proficiency.value = skill.value + (proficiency.isProficient ? this.newSheet.proficiency_bonus : 0);
+        proficiency.value = skill.value + (proficiency.isProficient ? this.newSheet.proficiencyBonus : 0);
       }
     }
-    console.log(`Proficiency ${proficiency.name} updated to value ${proficiency.value}`);
-    console.log(this.newSheet.proficiencies);
+  }
+
+  decreaseSkill(skill: ISkill) {
+    for (let key in this.newSheet.skills) {
+      if (this.newSheet.skills[key as keyof typeof this.newSheet.skills].id === skill.id) {
+        let skillToDecrease = this.newSheet.skills[key as keyof typeof this.newSheet.skills];
+        if (skillToDecrease.value > skillToDecrease.min) {
+          skillToDecrease.value -= 1;
+          this.updateAllProficiencies();
+        }
+        break;
+      }
+    }
+  }
+
+  increaseSkill(skill: ISkill) {
+    for (let key in this.newSheet.skills) {
+      if (this.newSheet.skills[key as keyof typeof this.newSheet.skills].id === skill.id) {
+        let skillToIncrease = this.newSheet.skills[key as keyof typeof this.newSheet.skills];
+        if (skillToIncrease.value < skillToIncrease.max) {
+          skillToIncrease.value += 1;
+          this.updateAllProficiencies();
+        }
+        break;
+      }
+    }
+  } 
+
+  updateAllProficiencies(){
+    for (let proficiency of this.newSheet.proficiencies) {
+      this.updateProficiencyValue(proficiency);
+    }
+  }
+
+  increaseLevel() {
+    if (this.newSheet.level < 20) {
+      this.newSheet.level += 1; 
+      this.updateHP();
+      this.updateAllProficiencyBonus();
+    }
+  }
+
+  decreaseLevel() {
+    if (this.newSheet.level > 1) {
+      this.newSheet.level -= 1;
+      this.updateHP();
+      this.updateAllProficiencyBonus();
+    }
+  }
+
+  updateAllProficiencyBonus(){
+    this.newSheet.proficiencyBonus = Math.floor((this.newSheet.level + 1) / 4) + 2;
+    this.updateAllProficiencies();
   }
 
   addContact() {
@@ -93,15 +143,4 @@ export class CharacterSheet implements OnInit {
     // Logic to remove a contact by index
   }
 
-  decreaseSkill(skill: ISkill) {
-    console.log('decreseSkill called');
-  }
-
-  increaseSkill(skill: ISkill) {
-    console.log('increaseSkill called');
-  } 
-
-  getInfluenceTotal(): number {
-    return 3
-  }
 }

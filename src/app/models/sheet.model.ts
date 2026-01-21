@@ -33,7 +33,7 @@ export interface ICharacterSheet {
   howWillHelp: string;
   background: string;
   level: number;
-  proficiency_bonus: number;
+  proficiencyBonus: number;
   hp: number;
   skills: {
     physicalSkill: ISkill;
