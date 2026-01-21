@@ -136,11 +136,21 @@ export class CharacterSheet implements OnInit {
   }
 
   addContact() {
-    // Logic to add a new contact
+    const newContact: IContact = {
+      id: this.newSheet.contacts.length + 1,
+      name: '',
+      relationship: '',
+      location: ''
+    };
+    this.newSheet.contacts.push(newContact);
   }
 
   removeContact(index: number) {
-    // Logic to remove a contact by index
+    this.newSheet.contacts = this.newSheet.contacts.filter(contact => contact.id !== index);
+    // Reassign IDs.. not the best, but works
+    this.newSheet.contacts.forEach((contact, idx) => {
+      contact.id = idx + 1;
+    });
   }
 
 }
