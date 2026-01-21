@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 //models
@@ -15,7 +15,7 @@ import { FilterBySkillPipe } from '../../pipes/filter-by-skill-pipe';
   styleUrl: './character-sheet.css',
 })
 export class CharacterSheet implements OnInit {
-  constructor() {}  
+  constructor(private cdr: ChangeDetectorRef) {}  
 
   newSheet: ICharacterSheet = {
     name: '',
@@ -153,4 +153,40 @@ export class CharacterSheet implements OnInit {
     });
   }
 
+  exportSheet() {
+    const sheetData = JSON.stringify(this.newSheet, null, 2);
+    const blob = new Blob([sheetData], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${this.newSheet.name || 'character_sheet'}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  importSheet() {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'application/json';
+    input.onchange = (event: any) => {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        try {
+          const importedSheet: ICharacterSheet = JSON.parse(e.target.result);
+          this.newSheet = importedSheet;
+          this.cdr.detectChanges();
+        } catch (error) {
+          console.error('Erro ao importar a ficha:', error);
+        }
+      };
+      reader.readAsText(file);
+    };
+    input.click();
+  }
+
+  printSheet() {
+    window.alert('impressão ta paia por enquanto');
+    window.print();
+  }
 }
