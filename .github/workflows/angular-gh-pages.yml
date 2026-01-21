@@ -48,12 +48,14 @@ jobs:
       - name: Build
         run: npm run build --prod --base-href="/rpg-guerrilha-urbana/"
 
+      - name: Create 404.html for SPA routing
+        run: cp ./dist/rpg-guerrilha-urbana/browser/index.html ./dist/rpg-guerrilha-urbana/browser/404.html
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./dist/rpg-guerrilha-urbana/browser
           name: github-pages
-          retention-days: 1
 
   # Deployment job
   deploy:
