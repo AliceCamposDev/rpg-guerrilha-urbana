@@ -4,5 +4,6 @@ import { CharacterSheet } from './pages/character-sheet/character-sheet';
 
 export const routes: Routes = [
   { path: 'character-sheet', component: CharacterSheet },
+  { path: 'rpg-guerrilha-urbana', component: Material },
   { path: '', component: Material },
 ];
