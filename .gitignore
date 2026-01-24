@@ -36,13 +36,13 @@ yarn-error.log
 testem.log
 /typings
 __screenshots__/
-
-# System files
 .DS_Store
 Thumbs.db
 .mypy_cache/
 .vscode/
 __pycache__/
-__pycache__/*
+*/__pycache__/
+*.pyc
+*.pyo
 .obsidian/*
 .obsidian/

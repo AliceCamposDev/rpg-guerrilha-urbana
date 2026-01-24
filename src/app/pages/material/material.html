@@ -2,7 +2,7 @@
 
 <div class="material-container">
     <div class="graph-viewer">
-        <app-graph-view (noteSelected)="onNoteSelected($event)"></app-graph-view>
+        <app-book-graph (noteSelected)="onNoteSelected($event)"></app-book-graph>
     </div>
     <div class="note-viewer">
         <app-note-viewer [noteName]="selectedNoteName"></app-note-viewer>
