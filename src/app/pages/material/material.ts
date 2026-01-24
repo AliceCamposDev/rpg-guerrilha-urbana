@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { GraphViewerComponent } from '../../features/book/graph-view/graph-view';
 import { NoteViewer } from '../../components/note-viewer/note-viewer';
-
+import { BookGraph } from '../../components/book-graph/book-graph';
 @Component({
   selector: 'app-material',
-  imports: [GraphViewerComponent, NoteViewer],
+  imports: [BookGraph, NoteViewer],
   templateUrl: './material.html',
   styleUrl: './material.css',
 })

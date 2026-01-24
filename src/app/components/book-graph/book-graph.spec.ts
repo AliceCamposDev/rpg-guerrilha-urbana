@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HomeView } from './home-view';
+import { BookGraph } from './book-graph';
 
-describe('HomeView', () => {
-  let component: HomeView;
-  let fixture: ComponentFixture<HomeView>;
+describe('BookGraph', () => {
+  let component: BookGraph;
+  let fixture: ComponentFixture<BookGraph>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HomeView]
+      imports: [BookGraph]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(HomeView);
+    fixture = TestBed.createComponent(BookGraph);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

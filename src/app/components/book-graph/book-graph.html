@@ -1,0 +1,25 @@
+<div class="graph-container">
+    <div class="graph-controls">
+        <div class="stats" *ngIf="graphData">
+            <span class="stat-badge"> 📝 {{ graphData.stats.total_notes }} notas </span>
+            <span class="stat-badge">
+                🔗 {{ graphData.stats.total_links }} conexões
+            </span>
+        </div>
+        <div class="controls">
+            <button class="btn-control" (click)="fitGraph()" title="Centralizar">🎯</button>
+            <button class="btn-control" (click)="resetGraph()" title="Redefinir">🔄</button>
+        </div>
+    </div>
+
+
+    <div class="error-alert" *ngIf="error && !loading">
+        <div class="alert-content">
+            <span>❌ {{ error }}</span>
+            <button class="btn-retry" (click)="loadGraph()">Tentar novamente</button>
+        </div>
+    </div>
+
+    <div #graphContainer id="cytoscape-graph" class="graph-area"></div>
+
+</div>
