@@ -7,7 +7,7 @@ import { Note, GraphData } from '../models/note.model';
   providedIn: 'root'
 })
 export class ApiService {
-  private apiUrl = 'https://rpg-guerrilha-urbana-back-fastapi.vercel.app/';
+  private apiUrl = 'https://rpg-guerrilha-urbana-back-fastapi.vercel.app';
 
   constructor(private http: HttpClient) { }
 
